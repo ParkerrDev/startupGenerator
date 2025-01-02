@@ -1,4 +1,4 @@
-# ideaGenerator
+# startupGenerator
 Uses local LLMs and random words to generate ideas for technology and business.
 
 **LLM** : llama3:70b
