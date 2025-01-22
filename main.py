@@ -1,5 +1,6 @@
 import random
 from ollama import chat
+from english_dictionary.scripts.read_pickle import get_dict
 
 def load_words():
     """
@@ -10,6 +11,20 @@ def load_words():
         valid_words = set(word_file.read().split())
     return valid_words
 
+def get_word_definitions(words):
+    """
+    Gets definitions for the given words using the English dictionary.
+    Returns a dictionary of word: definition pairs.
+    """
+    english_dict = get_dict()
+    definitions = {}
+    for word in words:
+        try:
+            definitions[word] = english_dict[word]
+        except KeyError:
+            definitions[word] = "Definition not found"
+    return definitions
+
 def generate_random_words(word_list, num_words=3):
     """
     Selects a few random words from the provided list or set.
@@ -17,10 +32,11 @@ def generate_random_words(word_list, num_words=3):
     words_list = list(word_list)
     return random.sample(words_list, num_words)
 
-def generate_idea_with_ollama_stream(random_words, model='llama3:70b'):
+def generate_idea_with_ollama_stream(random_words, definitions, model='llama3:8b'):
+    word_def_pairs = [f"{word} ({definitions[word]})" for word in random_words]
     user_message = (
-        "Generate an innovative technology or business idea that involves "
-        f"the following concepts: {', '.join(random_words)}. "
+        "Generate a profitable business idea that involves "
+        f"the following concepts and their definitions: {', '.join(word_def_pairs)}. "
         "Explain what makes this idea unique and how it could be implemented."
     )
 
@@ -43,8 +59,12 @@ def generate_idea_with_ollama_stream(random_words, model='llama3:70b'):
 if __name__ == "__main__":
     english_words = load_words()
     random_words = generate_random_words(english_words, num_words=3)
+    definitions = get_word_definitions(random_words)
 
-    print("Generated Words:", random_words)
+    print("Generated Words with Definitions:")
+    for word in random_words:
+        print(f"{word}: {definitions[word]}")
+    print()
 
-    idea = generate_idea_with_ollama_stream(random_words, model='llama3:70b')
+    idea = generate_idea_with_ollama_stream(random_words, definitions, model='llama3:8b')
     print("Complete Idea (accumulated):\n", idea)
