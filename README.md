@@ -1,5 +1,5 @@
 # startupGenerator
-Uses local LLMs and random words to generate ideas for technology and business.
+A super simple python script that uses local LLMs and random words to generate ideas for technology and business.
 
 **LLM** : llama3:70b
 
