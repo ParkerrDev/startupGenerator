@@ -6,9 +6,11 @@ A super simple python script that uses local LLMs and random words to generate i
 ### Prompt:
 
 ```
-Generate an innovative technology or business idea that involves the following concepts: 
+Generate a profitable business idea that involves the following concepts and their definitions:
 
-"{word1}" "{word2}" "{word3}"
+{word 1: def}.
+{word 2: def}.
+{word 3: def}.
 
 Explain what makes this idea unique and how it could be implemented.
 ```
