@@ -1,7 +1,7 @@
 # startupGenerator
 A super simple python script that uses local LLMs and random words to generate ideas for technology and business.
 
-**LLM** : deepseek-r1:14b
+**LLM** : gemma3:12b-it-qat
 
 ### Prompt:
 
