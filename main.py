@@ -43,7 +43,7 @@ def generate_random_words(word_list, num_words=3):
     
     return list(selected_words)
 
-def generate_idea_with_ollama_stream(random_words, definitions, model='deepseek-r1:14b'):
+def generate_idea_with_ollama_stream(random_words, definitions, model='gemma3:12b-it-qat'):
     word_def_pairs = [f"{word} ({definitions[word]})" for word in random_words]
     user_message = (
         "Generate a profitable business idea that involves "
@@ -78,5 +78,5 @@ if __name__ == "__main__":
         print(f"{word}: {definitions[word]}")
     print()
 
-    idea = generate_idea_with_ollama_stream(random_words, definitions, model='deepseek-r1:14b')
+    idea = generate_idea_with_ollama_stream(random_words, definitions, model='gemma3:12b-it-qat')
     print("Complete Idea (accumulated):\n", idea)
